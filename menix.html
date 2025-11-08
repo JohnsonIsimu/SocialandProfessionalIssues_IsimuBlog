@@ -1,0 +1,2096 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SocialandProfessionalIssues_IsimuBlog</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* CSS Variables for consistent theming */
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #e74c3c;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --text: #333;
+            --text-light: #7f8c8d;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background-color: white;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--secondary);
+            transition: var(--transition);
+        }
+
+        a:hover {
+            color: var(--accent);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* Enhanced Header Styles */
+        header {
+            background-color: var(--primary);
+            color: white;
+            padding: 0;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            font-size: 1.8rem;
+            color: var(--secondary);
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .logo span {
+            color: var(--secondary);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 1.5rem;
+            position: relative;
+        }
+
+        nav ul li a {
+            color: white;
+            font-weight: 500;
+            padding: 0.5rem 0;
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        nav ul li a i {
+            font-size: 1.1rem;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--secondary);
+            bottom: 0;
+            left: 0;
+            transition: var(--transition);
+        }
+
+        nav ul li a:hover::after,
+        nav ul li a.active::after {
+            width: 100%;
+        }
+
+        nav ul li a.active {
+            color: var(--secondary);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Login Modal Styles */
+        .login-modal {
+            background: url(https://images.unsplash.com/photo-1548092372-0d1bd40894a3?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y3liZXIlMjBzZWN1cml0eXxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&q=60&w=500);
+            background-size: cover;
+            display: flex;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.5s ease;
+            color: black;
+        }
+
+        .login-container {
+            background: rgba(255, 255, 255, 0.15);
+            /* transparent glass look */
+            border-radius: 16px;
+            padding: 2.5rem;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+            width: 90%;
+            max-width: 450px;
+            position: relative;
+            text-align: center;
+            color: #fff;
+            animation: slideIn 0.5s ease;
+
+            /* 💠 Glassmorphism core effects */
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+
+            /* optional subtle border glow */
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(40px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+
+        .login-header {
+            margin-bottom: 2rem;
+        }
+
+        .login-header h1 {
+            color: white;
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .login-header p {
+            color: white;
+            font-size: 1rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: white;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            border-color: var(--secondary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+        }
+
+        .checkbox-group input {
+            margin-right: 0.5rem;
+        }
+
+        .form-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1.5rem;
+        }
+
+        .form-links {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--secondary);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 100px;
+            font-weight: 600;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(52, 152, 219, 0.6);
+        }
+
+        .btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+        }
+
+        .btn:hover::after {
+            left: 100%;
+        }
+
+        .error-message {
+            color: var(--accent);
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            display: none;
+        }
+
+        /* Blurred Content */
+        .blurred-content {
+            filter: blur(8px);
+            pointer-events: none;
+            user-select: none;
+            transition: filter 0.5s ease;
+        }
+
+        /* Hero Section Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        @keyframes gradientShift {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, rgba(44, 62, 80, 0.9), rgba(52, 152, 219, 0.8), rgba(44, 62, 80, 0.9)), url(https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80);
+            background-size: cover, 200% 200%;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+            animation: gradientShift 15s ease infinite;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center, transparent 20%, rgba(0, 0, 0, 0.3) 100%);
+            z-index: 1;
+        }
+
+        .hero .container {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease-out 0.2s both;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 1.5rem;
+            animation: fadeInUp 1s ease-out 0.4s both;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Main Content */
+        .main-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .content-section {
+            background: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+        }
+
+        .content-section h2 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--light);
+        }
+
+        .content-section h3 {
+            color: var(--secondary);
+            margin: 1.5rem 0 1rem;
+        }
+
+        .content-section p {
+            margin-bottom: 1rem;
+        }
+
+        .content-section ul,
+        .content-section ol {
+            margin-left: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .content-section li {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Enhanced Media Sections */
+        .media-section {
+            margin: 2rem 0;
+        }
+
+        .media-section h2 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--light);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .media-section h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--secondary), var(--accent), var(--secondary));
+        }
+
+        .media-section h2 i {
+            color: var(--secondary);
+        }
+
+        .media-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .media-item {
+            background: var(--light);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .media-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(52, 152, 219, 0.1), rgba(231, 76, 60, 0.1));
+            opacity: 0;
+            transition: var(--transition);
+            z-index: 1;
+        }
+
+        .media-item:hover::before {
+            opacity: 1;
+        }
+
+        .media-item:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .media-image {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .media-item:hover .media-image {
+            transform: scale(1.05);
+        }
+
+        .media-video {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .media-item:hover .media-video {
+            transform: scale(1.05);
+        }
+
+        .media-audio {
+            width: 100%;
+            margin-top: 0;
+        }
+
+        .media-content {
+            padding: 1.2rem;
+            position: relative;
+            z-index: 2;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .media-content h3 {
+            color: var(--primary);
+            margin-bottom: 0.8rem;
+            font-size: 1.1rem;
+            transition: var(--transition);
+        }
+
+        .media-item:hover .media-content h3 {
+            color: var(--secondary);
+        }
+
+        .media-content p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            line-height: 1.5;
+            flex-grow: 1;
+        }
+
+        .audio-thumbnail {
+            width: 100%;
+            height: 140px;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .media-item:hover .audio-thumbnail {
+            transform: scale(1.05);
+        }
+
+        .audio-player {
+            width: 100%;
+            margin-top: auto;
+        }
+
+        /* References */
+        .references {
+            background: var(--light);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-top: 2rem;
+        }
+
+        .references h3 {
+            margin-top: 0;
+        }
+
+        .references ul {
+            list-style: none;
+            margin-left: 0;
+        }
+
+        .references li {
+            margin-bottom: 0.8rem;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            height: fit-content;
+        }
+
+        .sidebar-widget {
+            margin-bottom: 2rem;
+        }
+
+        .sidebar-widget h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--light);
+        }
+
+        .sidebar-widget ul {
+            list-style: none;
+            margin-left: 0;
+        }
+
+        .sidebar-widget li {
+            margin-bottom: 0.8rem;
+            padding-left: 1rem;
+            position: relative;
+        }
+
+        .sidebar-widget li::before {
+            content: '•';
+            color: var(--secondary);
+            position: absolute;
+            left: 0;
+        }
+
+        /* Profile Page */
+        .profile-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            background: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+        }
+
+        .profile-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .profile-header h1 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .profile-info {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .profile-image {
+            text-align: center;
+        }
+
+        .profile-image img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--secondary);
+        }
+
+        .profile-details h2 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .profile-details p {
+            margin-bottom: 0.8rem;
+        }
+
+        .quote-section {
+            background: var(--light);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-top: 2rem;
+            text-align: center;
+        }
+
+        .quote-section blockquote {
+            font-style: italic;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .quote-section cite {
+            color: var(--text-light);
+        }
+
+        /* Enhanced Footer Styles */
+        footer {
+            background: var(--primary);
+            color: white;
+            padding: 3rem 0 0;
+            margin-top: 3rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1.2rem;
+            color: var(--secondary);
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-section h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--secondary);
+        }
+
+        .footer-section p {
+            margin-bottom: 1rem;
+            color: #ddd;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .footer-section ul li i {
+            margin-right: 10px;
+            color: var(--secondary);
+        }
+
+        .footer-section a {
+            color: #ddd;
+            transition: var(--transition);
+        }
+
+        .footer-section a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+
+        .footer-newsletter form {
+            display: flex;
+            margin-top: 1rem;
+        }
+
+        .footer-newsletter input {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            border-radius: 4px 0 0 4px;
+            outline: none;
+        }
+
+        .footer-newsletter button {
+            background: var(--secondary);
+            color: white;
+            border: none;
+            padding: 0 15px;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .footer-newsletter button:hover {
+            background: #2980b9;
+        }
+
+        .footer-bottom {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 1.5rem 0;
+            text-align: center;
+        }
+
+        .footer-bottom-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .copyright {
+            margin-bottom: 0;
+        }
+
+        /* Enhanced Profile Container Styles */
+        .profile-container {
+            background-image: linear-gradient(rgba(44, 62, 80, 0.7), rgba(44, 62, 80, 0.7)), url(https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80);
+            max-width: 1200px;
+            margin: 2rem auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+            background-size: cover;
+            background-position: center;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            animation: backgroundPan 30s infinite linear, fadeIn 1.5s ease-out;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        .profile-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                radial-gradient(circle at 20% 80%, rgba(52, 152, 219, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(231, 76, 60, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(46, 204, 113, 0.1) 0%, transparent 50%);
+            animation: float 6s ease-in-out infinite;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .profile-main {
+            background: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+        }
+
+        .profile-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--light);
+        }
+
+        .profile-header h1 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            font-size: 2.2rem;
+        }
+
+        .profile-header p {
+            color: var(--text-light);
+            font-size: 1.1rem;
+        }
+
+        .profile-info {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .profile-image {
+            text-align: center;
+        }
+
+        .profile-image img {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--secondary);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .profile-details h2 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--light);
+        }
+
+        .profile-details p {
+            margin-bottom: 0.8rem;
+        }
+
+        .profile-details strong {
+            color: var(--dark);
+        }
+
+        .profile-skills {
+            margin-top: 2rem;
+        }
+
+        .skills-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 1rem;
+        }
+
+        .skill-tag {
+            background: var(--light);
+            color: var(--primary);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+
+        .skill-tag:hover {
+            background: var(--secondary);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Enhanced Quote Section Styles */
+        .quotes-sidebar {
+            background: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            height: fit-content;
+        }
+
+        .quotes-sidebar h2 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            text-align: center;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--light);
+        }
+
+        .quote-section {
+            background: var(--light);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            transition: var(--transition);
+            border-left: 4px solid var(--secondary);
+        }
+
+        .quote-section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .quote-section blockquote {
+            font-style: italic;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+            line-height: 1.7;
+        }
+
+        .quote-section cite {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        /* Background Animation Keyframes */
+        @keyframes backgroundZoom {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        @keyframes backgroundPan {
+            0% {
+                background-position: 0% 0%;
+            }
+
+            25% {
+                background-position: 100% 0%;
+            }
+
+            50% {
+                background-position: 100% 100%;
+            }
+
+            75% {
+                background-position: 0% 100%;
+            }
+
+            100% {
+                background-position: 0% 0%;
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(52, 152, 219, 0.4);
+            }
+
+            70% {
+                box-shadow: 0 0 0 10px rgba(52, 152, 219, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(52, 152, 219, 0);
+            }
+        }
+
+        @keyframes shimmer {
+            0% {
+                background-position: -1000px 0;
+            }
+
+            100% {
+                background-position: 1000px 0;
+            }
+        }
+
+        /* ========== RESPONSIVE DESIGN ========== */
+
+        /* Large Desktop Screens (1200px and above) */
+        @media screen and (min-width: 1200px) {
+            .container {
+                max-width: 1400px;
+            }
+
+            .hero h1 {
+                font-size: 3.5rem;
+            }
+
+            .hero p {
+                font-size: 1.4rem;
+            }
+
+            .media-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        /* Standard Desktop (992px to 1199px) */
+        @media screen and (min-width: 992px) and (max-width: 1199px) {
+            .container {
+                max-width: 1140px;
+            }
+
+            .hero h1 {
+                font-size: 3rem;
+            }
+
+            .media-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* Tablets and Small Desktops (768px to 991px) */
+        @media screen and (min-width: 768px) and (max-width: 991px) {
+            .container {
+                max-width: 960px;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.2rem;
+            }
+
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+
+            .profile-info {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .media-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            nav ul {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--primary);
+                flex-direction: column;
+                padding: 1rem 0;
+            }
+
+            nav ul.show {
+                display: flex;
+            }
+
+            nav ul li {
+                margin: 0;
+                text-align: center;
+            }
+
+            nav ul li a {
+                padding: 1rem;
+                justify-content: center;
+            }
+        }
+
+        /* Large Mobile Devices (576px to 767px) */
+        @media screen and (min-width: 576px) and (max-width: 767px) {
+            .container {
+                max-width: 720px;
+            }
+
+            .hero {
+                padding: 3rem 0;
+            }
+
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .main-content {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .content-section {
+                padding: 1.5rem;
+            }
+
+            .profile-info {
+                grid-template-columns: 1fr;
+                text-align: block;
+                gap: 1.5rem;
+            }
+
+            .profile-image img {
+                width: 150px;
+                height: 150px;
+            }
+
+            .media-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+
+            .form-footer {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: flex-start;
+            }
+
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            nav ul {
+                margin-top: 1rem;
+                justify-content: center;
+            }
+
+            nav ul li {
+                margin: 0 0.75rem;
+            }
+        }
+
+        /* Small Mobile Devices (up to 575px) */
+        @media screen and (max-width: 575px) {
+            .container {
+                width: 95%;
+                padding: 0 10px;
+            }
+
+            .hero {
+                padding: 2rem 0;
+            }
+
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .main-content {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .content-section {
+                padding: 1rem;
+            }
+
+            .content-section h2 {
+                font-size: 1.5rem;
+            }
+
+            .profile-info {
+                grid-template-columns: 1fr;
+                text-align: block;
+                gap: 1rem;
+            }
+
+            .profile-image img {
+                width: 120px;
+                height: 120px;
+            }
+
+            .media-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+
+            .form-footer {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: flex-start;
+            }
+
+            .login-container {
+                padding: 1.5rem;
+            }
+
+            .login-header h1 {
+                font-size: 1.5rem;
+            }
+
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            nav ul {
+                margin-top: 1rem;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+
+            nav ul li {
+                margin: 0 0.5rem;
+            }
+
+            .logo-text {
+                font-size: 1.2rem;
+            }
+
+            .btn {
+                padding: 0.7rem 1.2rem;
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Landscape Orientation for Mobile Devices */
+        @media screen and (max-height: 500px) and (orientation: landscape) {
+            .hero {
+                padding: 1.5rem 0;
+            }
+
+            .hero h1 {
+                font-size: 1.8rem;
+                margin-bottom: 0.5rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+                margin-bottom: 1rem;
+            }
+
+            .login-container {
+                max-height: 90vh;
+                overflow-y: auto;
+            }
+
+            .content-section {
+                padding: 1rem;
+            }
+        }
+
+        /* High DPI/Retina Displays */
+        @media (-webkit-min-device-pixel-ratio: 2),
+        (min-resolution: 192dpi) {
+            .hero {
+                background-image: linear-gradient(135deg, rgba(44, 62, 80, 0.9), rgba(52, 152, 219, 0.8), rgba(44, 62, 80, 0.9)), url(https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80);
+            }
+        }
+
+        /* Print Styles */
+        @media print {
+
+            .login-modal,
+            .mobile-menu-btn,
+            .footer-newsletter,
+            .btn {
+                display: none !important;
+            }
+
+            .blurred-content {
+                filter: none !important;
+                pointer-events: auto !important;
+                user-select: auto !important;
+            }
+
+            body {
+                background: white;
+                color: black;
+                font-size: 12pt;
+            }
+
+            a {
+                color: black;
+                text-decoration: underline;
+            }
+
+            .container {
+                width: 100%;
+                max-width: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Login Modal -->
+    <div class="login-modal" id="loginModal">
+        <div class="login-container">
+            <div class="login-header">
+                <h1>Welcome to Isimu Web Guardian</h1>
+                <p>Please sign in to access our content</p>
+            </div>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" class="form-control" placeholder="Enter your username" required>
+                    <div class="error-message" id="usernameError">Please enter a valid username</div>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" class="form-control" placeholder="Enter your password"
+                        required>
+                    <div class="error-message" id="passwordError">Please enter a valid password</div>
+                </div>
+                <div class="form-group checkbox-group">
+                    <input type="checkbox" id="remember">
+                    <label for="remember">Remember me</label>
+                </div>
+                <div class="form-footer">
+                    <button type="submit" class="btn">Login</button>
+
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Enhanced Header -->
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <div class="logo-text">Isimu<span>Web</span> Guardian</div>
+            </div>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            <nav>
+                <ul id="navMenu">
+                    <li><a href="#home-page" id="home-link"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="#profile" id="profile-link"><i class="fas fa-user"></i> Profile</a></li>
+
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Home Page Content -->
+    <main id="home-page" class="blurred-content">
+        <section class="hero">
+            <div class="container">
+                <h1>Understanding Cyberbullying & Online Harassment</h1>
+                <p>Learn how to recognize, prevent, and respond to digital abuse in our connected world.</p>
+                <a href="#main-content" class="btn">Learn More</a>
+            </div>
+        </section>
+
+        <div class="container main-content" id="main-content">
+            <div class="content-column">
+                <section class="content-section">
+                    <h2>What is Cyberbullying?</h2>
+                    <p>Cyberbullying is the use of digital communication tools to deliberately and repeatedly harass,
+                        threaten, or humiliate someone. Unlike traditional bullying, cyberbullying can happen 24/7,
+                        reach a victim anywhere, and be perpetrated anonymously, making it particularly damaging.</p>
+
+                    <h3>Common Forms of Cyberbullying</h3>
+                    <ul>
+                        <li><strong>Harassment:</strong> Sending offensive, rude, and insulting messages</li>
+                        <li><strong>Denigration:</strong> Spreading rumors or posting false information</li>
+                        <li><strong>Impersonation:</strong> Pretending to be someone else to damage their reputation
+                        </li>
+                        <li><strong>Outing:</strong> Sharing someone's private information without consent</li>
+                        <li><strong>Exclusion:</strong> Intentionally leaving someone out of online groups or activities
+                        </li>
+                        <li><strong>Cyberstalking:</strong> Repeated, intense harassment that includes threats</li>
+                    </ul>
+                </section>
+
+                <section class="content-section">
+                    <h2>The Impact of Cyberbullying</h2>
+                    <p>Cyberbullying can have severe consequences on victims' mental health, academic performance, and
+                        overall well-being. The constant nature of digital harassment means victims often feel they have
+                        no escape, leading to feelings of powerlessness and isolation.</p>
+
+                    <h3>Psychological Effects</h3>
+                    <p>Victims of cyberbullying often experience increased rates of:</p>
+                    <ul>
+                        <li>Anxiety and depression</li>
+                        <li>Low self-esteem</li>
+                        <li>Social isolation</li>
+                        <li>Sleep disturbances</li>
+                        <li>Academic difficulties</li>
+                        <li>In extreme cases, suicidal thoughts</li>
+                    </ul>
+
+                    <h3>Societal Impact</h3>
+                    <p>Beyond individual victims, cyberbullying contributes to a toxic online environment that affects
+                        everyone. It can:</p>
+                    <ul>
+                        <li>Reduce participation in online spaces, particularly among vulnerable groups</li>
+                        <li>Create environments where harassment becomes normalized</li>
+                        <li>Undermine digital platforms as spaces for healthy discourse</li>
+                        <li>Place additional burdens on schools, workplaces, and law enforcement</li>
+                    </ul>
+                </section>
+
+                <!-- Images Section -->
+                <section class="content-section media-section">
+                    <h2><i class="fas fa-images"></i> Educational Images</h2>
+                    <div class="media-grid">
+                        <div class="media-item">
+                            <img src="https://images.unsplash.com/photo-1584433144859-1fc3ab64a957?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+                                alt="Illustration of cyberbullying concept" class="media-image">
+                            <div class="media-content">
+                                <h3>Understanding Digital Harassment</h3>
+                                <p>Visual representation of how cyberbullying affects individuals in digital spaces.</p>
+                            </div>
+                        </div>
+
+                        <div class="media-item">
+                            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+                                alt="Digital safety concept" class="media-image">
+                            <div class="media-content">
+                                <h3>Digital Safety Practices</h3>
+                                <p>Important steps to protect yourself and others from online harassment.</p>
+                            </div>
+                        </div>
+
+                        <div class="media-item">
+                            <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+                                alt="Online privacy illustration" class="media-image">
+                            <div class="media-content">
+                                <h3>Protecting Your Online Privacy</h3>
+                                <p>How to maintain privacy and control your digital footprint.</p>
+                            </div>
+                        </div>
+
+                        <div class="media-item">
+                            <img src="https://images.unsplash.com/photo-1593642532842-98d0fd5ebc1a?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+                                alt="Social media awareness" class="media-image">
+                            <div class="media-content">
+                                <h3>Social Media Awareness</h3>
+                                <p>Understanding the impact of your online actions on others.</p>
+                            </div>
+                        </div>
+
+                        <div class="media-item">
+                            <img src="https://images.unsplash.com/photo-1517077304055-6e89abbf09b0?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+                                alt="Cyberbullying prevention" class="media-image">
+                            <div class="media-content">
+                                <h3>Prevention Strategies</h3>
+                                <p>Proactive approaches to prevent cyberbullying in your community.</p>
+                            </div>
+                        </div>
+
+                        <div class="media-item">
+                            <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+                                alt="Digital citizenship" class="media-image">
+                            <div class="media-content">
+                                <h3>Digital Citizenship</h3>
+                                <p>Being a responsible and ethical participant in the digital world.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Videos Section -->
+                <section class="content-section media-section">
+                    <h2><i class="fas fa-video"></i> Educational Videos</h2>
+                    <div class="media-grid">
+                        <div class="media-item">
+                            <div class="media-video-container">
+                                <iframe width="100%" height="180" src="https://www.youtube.com/embed/i7WvoYhv1hg"
+                                    title="Recognizing Cyberbullying: What Signs To Look For? - Raising Digital Kids"
+                                    frameborder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            </div>
+                            <div class="media-content">
+                                <h3>Recognizing Cyberbullying</h3>
+                                <p>This video explains how to identify different forms of cyberbullying and online
+                                    harassment.</p>
+                            </div>
+                        </div>
+
+                        <div class="media-item">
+                            <div class="media-video-container">
+                                <iframe width="100%" height="180" src="https://www.youtube.com/embed/BuhqCYLFeNw"
+                                    title="Understanding Your Digital Footprint: Media Activity" frameborder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+                                </iframe>
+                            </div>
+                            <div class="media-content">
+                                <h3>Digital Footprint Awareness</h3>
+                                <p>Understanding how your online actions create a permanent digital record.</p>
+                            </div>
+                        </div>
+
+                        <div class="media-item">
+                            <div class="media-video-container">
+                                <iframe width="100%" height="180" src="https://www.youtube.com/embed/Cnc4LaevRBw"
+                                    title="Internet Safety Tips for Teens - Helpful AND Funny" frameborder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            </div>
+                            <div class="media-content">
+                                <h3>Online Safety for Teens</h3>
+                                <p>Essential safety tips for teenagers navigating social media and online platforms.</p>
+                            </div>
+                        </div>
+
+                        <div class="media-item">
+                            <div class="media-video-container">
+                                <iframe width="100%" height="180" src="https://www.youtube.com/embed/lyf78zry_pk"
+                                    title="What are Privacy Settings? A beginner&#39;s guide to keep your info safe online"
+                                    frameborder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            </div>
+                            <div class="media-content">
+                                <h3>Privacy Settings Guide</h3>
+                                <p>How to configure privacy settings on popular social media platforms.</p>
+                            </div>
+                        </div>
+
+                        <div class="media-item">
+                            <div class="media-video-container">
+                                <iframe width="100%" height="180" src="https://www.youtube.com/embed/4eLAZxx3Gg4"
+                                    title="Be the Change: Being an Upstander - How To Stand Up to Bullying"
+                                    frameborder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            </div>
+                            <div class="media-content">
+                                <h3>Being an Upstander</h3>
+                                <p>Learn how to support victims and stand up against online harassment.</p>
+                            </div>
+                        </div>
+
+                        <div class="media-item">
+                            <div class="media-video-container">
+                                <iframe width="100%" height="180" src="https://www.youtube.com/embed/GuO8OeLe3bY"
+                                    title="Cyberbullying: What It Is, The Effects It Can Have On Teens, And Signs To Watch For"
+                                    frameborder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            </div>
+                            <div class="media-content">
+                                <h3>Mental Health & Cyberbullying</h3>
+                                <p>Understanding the psychological impact of online harassment and coping strategies.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Podcasts Section -->
+                <section class="content-section media-section">
+                    <h2><i class="fas fa-podcast"></i> Educational Podcasts</h2>
+                    <div class="media-grid">
+                        <div class="media-item">
+                            <img src="https://images.unsplash.com/photo-1478737270239-2f02b77fc618?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+                                alt="Podcast about supporting victims" class="audio-thumbnail">
+                            <div class="media-content">
+                                <h3>Supporting Victims of Online Abuse</h3>
+                                <p>Listen to experts discuss strategies for supporting those affected by cyberbullying.
+                                </p>
+                                <div class="audio-player">
+                                    <iframe allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write"
+                                        frameborder="0" height="175"
+                                        style="width:100%;max-width:660px;overflow:hidden;border-radius:10px;"
+                                        sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation"
+                                        src="https://embed.podcasts.apple.com/us/podcast/episode-9-supporting-victims-of-abuse-with-erica-osakwe/id1590672998?i=1000546788821"></iframe>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="media-item">
+                            <img src="https://images.unsplash.com/photo-1589903308904-1010c2294adc?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+                                alt="Digital wellness podcast" class="audio-thumbnail">
+                            <div class="media-content">
+                                <h3>Digital Wellness & Mental Health</h3>
+                                <p>Exploring the connection between online activities and psychological well-being.</p>
+                                <div class="audio-player">
+                                    <iframe allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write"
+                                        frameborder="0" height="175"
+                                        style="width:100%;max-width:660px;overflow:hidden;border-radius:10px;"
+                                        sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation"
+                                        src="https://embed.podcasts.apple.com/us/podcast/digital-wellness-finding-balance-in-a-connected-world/id1821387412"></iframe>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="media-item">
+                            <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+                                alt="Parenting in digital age podcast" class="audio-thumbnail">
+                            <div class="media-content">
+                                <h3>Parenting in the Digital Age</h3>
+                                <p>Guidance for parents on monitoring and guiding children's online activities.</p>
+                                <div class="audio-player">
+                                    <iframe allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write"
+                                        frameborder="0" height="175"
+                                        style="width:100%;max-width:660px;overflow:hidden;border-radius:10px;"
+                                        sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation"
+                                        src="https://embed.podcasts.apple.com/us/podcast/ep-029-parenting-in-the-digital-age-part-1/id1690601812?i=1000615303995"></iframe>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="media-item">
+                            <img src="https://images.unsplash.com/photo-1589391886645-d51941baf7fb?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+                                alt="Legal aspects of cyberbullying podcast" class="audio-thumbnail">
+                            <div class="media-content">
+                                <h3>Legal Aspects of Cyberbullying</h3>
+                                <p>Understanding the legal consequences and protections against online harassment.</p>
+                                <div class="audio-player">
+                                    <iframe allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write"
+                                        frameborder="0" height="175"
+                                        style="width:100%;max-width:660px;overflow:hidden;border-radius:10px;"
+                                        sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation"
+                                        src="https://embed.podcasts.apple.com/us/podcast/cyberbullying/id1676348702?i=1000723469196"></iframe>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="media-item">
+                            <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+                                alt="School policies podcast" class="audio-thumbnail">
+                            <div class="media-content">
+                                <h3>School Policies & Cyberbullying</h3>
+                                <p>How educational institutions are addressing online harassment among students.</p>
+                                <div class="audio-player">
+                                    <iframe allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write"
+                                        frameborder="0" height="175"
+                                        style="width:100%;max-width:660px;overflow:hidden;border-radius:10px;"
+                                        sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation"
+                                        src="https://embed.podcasts.apple.com/us/podcast/the-impact-of-cyberbullying-with-tina-meier/id1488678905?i=1000559567886"></iframe>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="media-item">
+                            <img src="https://images.unsplash.com/photo-1589903308904-1010c2294adc?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+                                alt="Digital wellness podcast" class="audio-thumbnail">
+                            <div class="media-content">
+                                <h3>Recovery & Resilience Stories</h3>
+                                <p>Inspiring stories from individuals who have overcome cyberbullying experiences.</p>
+                                <div class="audio-player">
+                                    <iframe allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write"
+                                        frameborder="0" height="175"
+                                        style="width:100%;max-width:660px;overflow:hidden;border-radius:10px;"
+                                        sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation"
+                                        src="https://embed.podcasts.apple.com/us/podcast/recovery-resilience-vegas-shooting-stories-part-3/id1485114940?i=1000468296817"></iframe>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="content-section">
+                    <h2>References</h2>
+                    <div class="references">
+                        <h3>Credible Sources on Cyberbullying</h3>
+                        <ul>
+                            <li><a href="https://www.stopbullying.gov/cyberbullying/what-is-it"
+                                    target="_blank">StopBullying.gov - What Is Cyberbullying</a></li>
+                            <li><a href="https://www.unicef.org/end-violence/how-to-stop-cyberbullying"
+                                    target="_blank">UNICEF - How to Stop Cyberbullying</a></li>
+                            <li><a href="https://cyberbullying.org/" target="_blank">Cyberbullying Research Center</a>
+                            </li>
+                            <li><a href="https://www.apa.org/topics/bullying/cyberbullying-online-social-media"
+                                    target="_blank">American Psychological Association - Cyberbullying</a></li>
+                            <li><a href="https://www.commonsensemedia.org/cyberbullying" target="_blank">Common Sense
+                                    Media - Cyberbullying</a></li>
+                        </ul>
+                    </div>
+                </section>
+            </div>
+
+            <aside class="sidebar">
+                <div class="sidebar-widget">
+                    <h3>Quick Facts</h3>
+                    <ul>
+                        <li>About 37% of young people between 12 and 17 have been bullied online</li>
+                        <li>Girls are more likely than boys to be victims of cyberbullying</li>
+                        <li>60% of teens have witnessed online bullying</li>
+                        <li>Only 1 in 10 teen victims will inform a parent or trusted adult</li>
+                        <li>Victims of cyberbullying are 2x more likely to attempt suicide</li>
+                    </ul>
+                </div>
+
+                <div class="sidebar-widget">
+                    <h3>Prevention Tips</h3>
+                    <ul>
+                        <li>Think before you post online</li>
+                        <li>Never share passwords with friends</li>
+                        <li>Adjust privacy settings on social media</li>
+                        <li>Save evidence of cyberbullying</li>
+                        <li>Talk to a trusted adult if you're being harassed</li>
+                        <li>Be an upstander, not a bystander</li>
+                    </ul>
+                </div>
+
+                <div class="sidebar-widget">
+                    <h3>Get Help Now</h3>
+                    <p>If you or someone you know is being cyberbullied:</p>
+                    <ul>
+                        <li><strong>Crisis Text Line:</strong> Text HOME to 741741</li>
+                        <li><strong>National Suicide Prevention Lifeline:</strong> 1-800-273-8255</li>
+                        <li><strong>StopBullying.gov:</strong> Report cyberbullying</li>
+                    </ul>
+                </div>
+            </aside>
+        </div>
+    </main>
+
+    <!-- Profile Page -->
+    <main id="profile" class="blurred-content">
+        <div class="container profile-container">
+            <!-- Enhanced Profile Section -->
+            <div class="profile-main">
+                <div class="profile-header">
+                    <h1>Student Profile</h1>
+                    <p>Cybersecurity Awareness Advocate</p>
+                </div>
+
+                <div class="profile-info">
+                    <div class="profile-image">
+                        <img src="https://www.roosters.com.au/siteassets/2020/10/tupou/tupou-originstory-lead.png?center=0.17%2C0.5&preset=seo-card-large"
+                            alt="Profile-Picture">
+                    </div>
+                    <div class="profile-details">
+                        <h2>Personal Information</h2>
+                        <p><strong>Name:</strong> Johnson Isimu</p>
+                        <p><strong>ID#:</strong> 6582</p>
+                        <p><strong>Course:</strong> Bachelor of Science in Information Technology</p>
+                        <p><strong>Year Level:</strong> 1st Year</p>
+                        <p><strong>College:</strong> Northern Luzon Adventist College</p>
+                        <p><strong>Email:</strong> johnsonisimu@gmail.com</p>
+
+                        <h2>About Me</h2>
+                        <p>I am passionate about creating safer digital spaces for everyone. My studies focus on
+                            cybersecurity ethics, digital forensics, and online safety education. I believe that
+                            awareness
+                            and education are the first lines of defense against cyber threats including cyberbullying
+                            and
+                            online harassment.</p>
+
+                        <div class="profile-skills">
+                            <h2>Interests & Skills</h2>
+                            <div class="skills-list">
+                                <span class="skill-tag">Digital Privacy</span>
+                                <span class="skill-tag">Ethical Hacking</span>
+                                <span class="skill-tag">Cybersecurity Policy</span>
+                                <span class="skill-tag">Online Safety Education</span>
+                                <span class="skill-tag">Digital Forensics</span>
+                                <span class="skill-tag">Network Security</span>
+                                <span class="skill-tag">Data Protection</span>
+                                <span class="skill-tag">Threat Analysis</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Separated Quote Section -->
+            <div class="quotes-sidebar">
+                <h2>Cybersecurity Quotes</h2>
+                <div class="quote-section">
+                    <blockquote>
+                        "The internet is a reflection of our society and that mirror is going to be reflecting what we
+                        see.
+                        If we do not like what we see in that mirror the problem is not to fix the mirror, we have to
+                        fix
+                        society."
+                    </blockquote>
+                    <cite>- Vint Cerf, Internet Pioneer</cite>
+                </div>
+                <div class="quote-section">
+                    <blockquote>
+                        "Cyberbullying is bullying. Hiding behind a pretty screen doesn't make it less hateful, written
+                        words have power."
+                    </blockquote>
+                    <cite>— Rebecca Black, Singer and Anti-Bullying Advocate</cite>
+                </div>
+                <div class="quote-section">
+                    <blockquote>
+                        "The internet is a reflection of our society, and that mirror is going to show us the good and
+                        the
+                        bad."
+                    </blockquote>
+                    <cite>— Alexis Ohanian, Co-founder of Reddit</cite>
+                </div>
+                <div class="quote-section">
+                    <blockquote>
+                        "Online harassment is not virtual—it's real harm happening in real time to real people."
+                    </blockquote>
+                    <cite>— Anita Sarkeesian, Media Critic & Digital Rights Activist</cite>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Enhanced Footer -->
+    <footer class="blurred-content">
+        <div class="container footer-content">
+            <div class="footer-section">
+                <h3>About Isimu Web Guardian</h3>
+                <p>Our mission is to educate and empower individuals to navigate the digital world safely and
+                    responsibly.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><i class="fas fa-chevron-right"></i><a href="#home-page">Home</a></li>
+                    <li><i class="fas fa-chevron-right"></i><a href="#profile">Profile</a></li>
+
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Info</h3>
+                <ul>
+                    <li><i class="fas fa-map-marker-alt"></i> Sangunto-Artacho,Sison-Pangasinan,Philippines</li>
+                    <li><i class="fas fa-phone"></i> +63 0945 7081 396</li>
+                    <li><i class="fas fa-envelope"></i> info@isimuwebrguardian.com</li>
+                </ul>
+            </div>
+            <div class="footer-section footer-newsletter">
+                <h3>Newsletter</h3>
+                <p>Subscribe to our newsletter for the latest cybersecurity tips and updates.</p>
+                <form>
+                    <input type="email" placeholder="Your email address" required>
+                    <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                </form>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container footer-bottom-content">
+                <p class="copyright">&copy; 2025 Isimu Web Guardian. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Login functionality
+        document.addEventListener('DOMContentLoaded', function () {
+            // Get elements
+            const loginModal = document.getElementById('loginModal');
+            const loginForm = document.getElementById('loginForm');
+            const homeContent = document.getElementById('home-page');
+            const profileContent = document.getElementById('profile');
+            const footerContent = document.querySelector('footer');
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const navMenu = document.getElementById('navMenu');
+
+            // Track login status
+            let isLoggedIn = false;
+
+            // Check if user is already logged in (from localStorage)
+            if (localStorage.getItem('isLoggedIn') === 'true') {
+                isLoggedIn = true;
+                handleSuccessfulLogin();
+            }
+
+            // Show login modal
+            function showLoginModal() {
+                loginModal.style.display = 'flex';
+                homeContent.classList.add('blurred-content');
+                profileContent.classList.add('blurred-content');
+                footerContent.classList.add('blurred-content');
+            }
+
+            // Hide login modal
+            function hideLoginModal() {
+                loginModal.style.display = 'none';
+                // Clear form
+                loginForm.reset();
+                // Hide error messages
+                document.getElementById('usernameError').style.display = 'none';
+                document.getElementById('passwordError').style.display = 'none';
+            }
+
+            // Handle successful login
+            function handleSuccessfulLogin() {
+                hideLoginModal();
+                homeContent.classList.remove('blurred-content');
+                profileContent.classList.remove('blurred-content');
+                footerContent.classList.remove('blurred-content');
+                isLoggedIn = true;
+                localStorage.setItem('isLoggedIn', 'true');
+            }
+
+            // Validate login
+            function validateLogin(username, password) {
+                let isValid = true;
+
+                // Username validation
+                if (username.trim() === '') {
+                    document.getElementById('usernameError').style.display = 'block';
+                    isValid = false;
+                } else {
+                    document.getElementById('usernameError').style.display = 'none';
+                }
+
+                // Password validation
+                if (password.trim() === '') {
+                    document.getElementById('passwordError').style.display = 'block';
+                    isValid = false;
+                } else {
+                    document.getElementById('passwordError').style.display = 'none';
+                }
+
+                return isValid;
+            }
+
+            // Show login modal on page load if not logged in
+            if (!isLoggedIn) {
+                setTimeout(() => {
+                    showLoginModal();
+                }, 500);
+            }
+
+            // Form submission
+            loginForm.addEventListener('submit', function (e) {
+                e.preventDefault();
+
+                const username = document.getElementById('username').value;
+                const password = document.getElementById('password').value;
+
+                if (validateLogin(username, password)) {
+                    // Simple authentication (in a real app, this would be server-side)
+                    if (username === 'Johnson Isimu' && password === '0120') {
+                        handleSuccessfulLogin();
+                        alert('Login successful! Welcome to Isimu Cyber Guardian.');
+                    } else {
+                        alert('Invalid username or password. Please try again.');
+                    }
+                }
+            });
+
+            // Mobile menu toggle
+            mobileMenuBtn.addEventListener('click', function () {
+                navMenu.classList.toggle('show');
+            });
+
+            // Close mobile menu when clicking outside
+            document.addEventListener('click', function (e) {
+                if (!e.target.closest('nav') && !e.target.closest('.mobile-menu-btn')) {
+                    navMenu.classList.remove('show');
+                }
+            });
+
+            // Close modal when clicking outside (disabled to force login)
+            // loginModal.addEventListener('click', function(e) {
+            //     if (e.target === loginModal) {
+            //         hideLoginModal();
+            //     }
+            // });
+        });
+    </script>
+</body>
+
+</html>
